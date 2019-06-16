@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import Contact from "./Contact";
+import {Consumer} from "../context";
 
 class Contacts extends Component {
   constructor(props) {
@@ -37,17 +38,23 @@ class Contacts extends Component {
   };
 
   render() {
-    const {contacts} = this.state;
     return (
-      <Fragment>
-        {contacts.map(contact =>
-          <Contact
-            key={contact.id}
-            contact={contact}
-            deleteClickHandler={this.deleteContact(contact.id)}
-          />
-        )}
-      </Fragment>
+      <Consumer>
+        {value => {
+          const {contacts} = value;
+          return (
+            <Fragment>
+              {contacts.map(contact =>
+                <Contact
+                  key={contact.id}
+                  contact={contact}
+                  deleteClickHandler={this.deleteContact(contact.id)}
+                />
+              )}
+            </Fragment>
+          )
+        }}
+      </Consumer>
     );
   }
 }
