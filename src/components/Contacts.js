@@ -48,7 +48,6 @@ class Contacts extends Component {
                 <Contact
                   key={contact.id}
                   contact={contact}
-                  deleteClickHandler={this.deleteContact(contact.id)}
                 />
               )}
             </Fragment>
