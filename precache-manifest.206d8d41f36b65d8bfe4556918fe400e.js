@@ -64,12 +64,12 @@ self.__precacheManifest = [
     "url": "/contactmanager/static/media/fa-regular-400.8fdea4e8.svg"
   },
   {
-    "revision": "acf50f59802f20d8b45220eaae532a1c",
-    "url": "/contactmanager/static/media/fa-solid-900.acf50f59.ttf"
-  },
-  {
     "revision": "ef3df98419d143d9617fe163bf4edc0b",
     "url": "/contactmanager/static/media/fa-solid-900.ef3df984.eot"
+  },
+  {
+    "revision": "acf50f59802f20d8b45220eaae532a1c",
+    "url": "/contactmanager/static/media/fa-solid-900.acf50f59.ttf"
   },
   {
     "revision": "073c2f3ce60eaf69cc2767ef3d989078",
