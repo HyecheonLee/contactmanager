@@ -11,13 +11,6 @@ class Contacts extends Component {
     }
   }
 
-  deleteContact = (id) => (e) => {
-    this.setState({
-      contacts: this.state.contacts
-        .filter(value => value.id !== id)
-    })
-  };
-
   render() {
     return (
       <Consumer>
