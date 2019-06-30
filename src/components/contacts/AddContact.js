@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
-import {Consumer} from "../../context";
 import TextInputGroup from "../layout/TextInputGroup";
-import axios from 'axios';
+import {connect} from "react-redux";
+import PropTypes from "prop-types";
+import uuid from 'uuid';
+import {addContact} from "../../actions/contactActions";
 
 class AddContact extends Component {
   state = {
@@ -15,7 +17,7 @@ class AddContact extends Component {
       [e.target.name]: e.target.value
     });
   };
-  onSubmit = async (dispatch, e) => {
+  onSubmit = (e) => {
     e.preventDefault();
     const {name, email, phone} = this.state;
     if (name === '') {
@@ -38,12 +40,13 @@ class AddContact extends Component {
     }
 
     const newContact = {
-      name: name,
+      id: uuid(),
+      name,
       email,
       phone
     };
-    let res = await axios.post(`https://jsonplaceholder.typicode.com/users`, newContact);
-    dispatch({type: 'ADD_CONTACT', payload: res.data});
+    this.props.addContact(newContact);
+
     this.setState({
       name: '',
       email: '',
@@ -56,51 +59,47 @@ class AddContact extends Component {
   render() {
     const {name, email, phone, errors} = this.state;
     return (
-      <Consumer>
-        {value => {
-          const {dispatch} = value;
-          return (
-            <div className="card mb-3">
-              <div className="card-header">Add Contact</div>
-              <div className="card-body">
-                <form onSubmit={this.onSubmit.bind(this, dispatch)}>
-                  <TextInputGroup
-                    label={"Name"}
-                    name={"name"}
-                    placeholder={"Enter Name..."}
-                    value={name}
-                    onChange={this.onChange}
-                    error={errors.name}
-                  />
-                  <TextInputGroup
-                    label={"Email"}
-                    onChange={this.onChange}
-                    value={email}
-                    placeholder={"Enter Email..."}
-                    name={"email"}
-                    type={"email"}
-                    error={errors.email}
-                  />
-                  <TextInputGroup
-                    label={"Phone"}
-                    onChange={this.onChange}
-                    value={phone}
-                    type={"tel"}
-                    placeholder={"Enter Phone..."}
-                    name={"phone"}
-                    error={errors.phone}
-                  />
-                  <input type="submit"
-                         value="Add Contact"
-                         className="btn btn-light btn-block"/>
-                </form>
-              </div>
-            </div>
-          );
-        }}
-      </Consumer>
+      <div className="card mb-3">
+        <div className="card-header">Add Contact</div>
+        <div className="card-body">
+          <form onSubmit={this.onSubmit.bind(this)}>
+            <TextInputGroup
+              label={"Name"}
+              name={"name"}
+              placeholder={"Enter Name..."}
+              value={name}
+              onChange={this.onChange}
+              error={errors.name}
+            />
+            <TextInputGroup
+              label={"Email"}
+              onChange={this.onChange}
+              value={email}
+              placeholder={"Enter Email..."}
+              name={"email"}
+              type={"email"}
+              error={errors.email}
+            />
+            <TextInputGroup
+              label={"Phone"}
+              onChange={this.onChange}
+              value={phone}
+              type={"tel"}
+              placeholder={"Enter Phone..."}
+              name={"phone"}
+              error={errors.phone}
+            />
+            <input type="submit"
+                   value="Add Contact"
+                   className="btn btn-light btn-block"/>
+          </form>
+        </div>
+      </div>
     );
   }
 }
 
-export default AddContact;
+AddContact.propTypes = {
+  addContact: PropTypes.func.isRequired,
+};
+export default connect(null, {addContact})(AddContact);
