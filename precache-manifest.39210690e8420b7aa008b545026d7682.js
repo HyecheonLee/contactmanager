@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/contactmanager/static/media/fa-solid-900.b5cf8ae2.woff2"
   },
   {
-    "revision": "c84e8007bb7eb86c8ece",
+    "revision": "e5213547e0424634d67d",
     "url": "/contactmanager/static/css/main.27d41515.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = [
     "url": "/contactmanager/static/media/fa-solid-900.b557f56e.svg"
   },
   {
-    "revision": "f6af7a6bddd548730f87",
-    "url": "/contactmanager/static/js/2.a62ac45e.chunk.js"
+    "revision": "1df86c727d04f602b9e9",
+    "url": "/contactmanager/static/js/2.7776ce26.chunk.js"
   },
   {
     "revision": "e07d9e40b26048d9abe2ef966cd6e263",
@@ -40,8 +40,8 @@ self.__precacheManifest = [
     "url": "/contactmanager/static/media/fa-brands-400.7559b377.woff2"
   },
   {
-    "revision": "c84e8007bb7eb86c8ece",
-    "url": "/contactmanager/static/js/main.5c127007.chunk.js"
+    "revision": "e5213547e0424634d67d",
+    "url": "/contactmanager/static/js/main.b34eb459.chunk.js"
   },
   {
     "revision": "fe9d62e0d16a333a20e63c3e7595f82e",
@@ -64,23 +64,23 @@ self.__precacheManifest = [
     "url": "/contactmanager/static/media/fa-regular-400.8fdea4e8.svg"
   },
   {
-    "revision": "ef3df98419d143d9617fe163bf4edc0b",
-    "url": "/contactmanager/static/media/fa-solid-900.ef3df984.eot"
-  },
-  {
     "revision": "acf50f59802f20d8b45220eaae532a1c",
     "url": "/contactmanager/static/media/fa-solid-900.acf50f59.ttf"
+  },
+  {
+    "revision": "ef3df98419d143d9617fe163bf4edc0b",
+    "url": "/contactmanager/static/media/fa-solid-900.ef3df984.eot"
   },
   {
     "revision": "073c2f3ce60eaf69cc2767ef3d989078",
     "url": "/contactmanager/static/media/fa-brands-400.073c2f3c.svg"
   },
   {
-    "revision": "f6af7a6bddd548730f87",
-    "url": "/contactmanager/static/css/2.0adabd4c.chunk.css"
+    "revision": "1df86c727d04f602b9e9",
+    "url": "/contactmanager/static/css/2.2a97e16f.chunk.css"
   },
   {
-    "revision": "d5200287d948bd240a657ed89b56bb3e",
+    "revision": "964c3b868f44b73af4d656131b96baec",
     "url": "/contactmanager/index.html"
   }
 ];
