@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
-import {Consumer} from "../../context";
 import TextInputGroup from "../layout/TextInputGroup";
 import axios from 'axios';
+import {connect} from "react-redux";
+import {getContact} from "../../actions/contactActions";
+import PropTypes from "prop-types";
 
 class EditContact extends Component {
   state = {
@@ -11,15 +13,18 @@ class EditContact extends Component {
     errors: {},
   };
 
-  async componentDidMount() {
+  componentDidMount() {
     const {id} = this.props.match.params;
-    const res = await axios.get(`https://jsonplaceholder.typicode.com/users/${id}`);
-    const contact = res.data;
+    this.props.getContact(id);
+  }
+
+  componentWillReceiveProps(nextProps, nextContext) {
+    const {name, email, phone} = nextProps.contact;
     this.setState({
-      name: contact.name,
-      email: contact.email,
-      phone: contact.phone
-    })
+      name,
+      email,
+      phone
+    });
   }
 
   onChange = (e) => {
@@ -71,51 +76,52 @@ class EditContact extends Component {
   render() {
     const {name, email, phone, errors} = this.state;
     return (
-      <Consumer>
-        {value => {
-          const {dispatch} = value;
-          return (
-            <div className="card mb-3">
-              <div className="card-header">Edit Contact</div>
-              <div className="card-body">
-                <form onSubmit={this.onSubmit.bind(this, dispatch)}>
-                  <TextInputGroup
-                    label={"Name"}
-                    name={"name"}
-                    placeholder={"Enter Name..."}
-                    value={name}
-                    onChange={this.onChange}
-                    error={errors.name}
-                  />
-                  <TextInputGroup
-                    label={"Email"}
-                    onChange={this.onChange}
-                    value={email}
-                    placeholder={"Enter Email..."}
-                    name={"email"}
-                    type={"email"}
-                    error={errors.email}
-                  />
-                  <TextInputGroup
-                    label={"Phone"}
-                    onChange={this.onChange}
-                    value={phone}
-                    type={"tel"}
-                    placeholder={"Enter Phone..."}
-                    name={"phone"}
-                    error={errors.phone}
-                  />
-                  <input type="submit"
-                         value="Update Contact"
-                         className="btn btn-light btn-block"/>
-                </form>
-              </div>
-            </div>
-          );
-        }}
-      </Consumer>
+      <div className="card mb-3">
+        <div className="card-header">Edit Contact</div>
+        <div className="card-body">
+          <form onSubmit={this.onSubmit.bind(this)}>
+            <TextInputGroup
+              label={"Name"}
+              name={"name"}
+              placeholder={"Enter Name..."}
+              value={name}
+              onChange={this.onChange}
+              error={errors.name}
+            />
+            <TextInputGroup
+              label={"Email"}
+              onChange={this.onChange}
+              value={email}
+              placeholder={"Enter Email..."}
+              name={"email"}
+              type={"email"}
+              error={errors.email}
+            />
+            <TextInputGroup
+              label={"Phone"}
+              onChange={this.onChange}
+              value={phone}
+              type={"tel"}
+              placeholder={"Enter Phone..."}
+              name={"phone"}
+              error={errors.phone}
+            />
+            <input type="submit"
+                   value="Update Contact"
+                   className="btn btn-light btn-block"/>
+          </form>
+        </div>
+      </div>
     );
   }
 }
 
-export default EditContact;
+EditContact.propTypes = {
+  contact: PropTypes.object.isRequired,
+  getContact: PropTypes.func.isRequired,
+};
+const mapStateToProps = state => ({
+  contact: state.contact.contact,
+});
+
+export default connect(mapStateToProps, {getContact})(EditContact);
