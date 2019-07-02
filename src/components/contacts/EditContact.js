@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import TextInputGroup from "../layout/TextInputGroup";
-import axios from 'axios';
 import {connect} from "react-redux";
-import {getContact} from "../../actions/contactActions";
+import {getContact, updateContact} from "../../actions/contactActions";
 import PropTypes from "prop-types";
 
 class EditContact extends Component {
@@ -32,7 +31,7 @@ class EditContact extends Component {
       [e.target.name]: e.target.value
     });
   };
-  onSubmit = async (dispatch, e) => {
+  onSubmit = async (e) => {
     e.preventDefault();
     const {name, email, phone} = this.state;
     if (name === '') {
@@ -53,23 +52,15 @@ class EditContact extends Component {
       });
       return;
     }
-
     const {id} = this.props.match.params;
-
+    
     const updateContact = {
+      id,
       name,
       email,
       phone
     };
-
-    let res = await axios.put(`https://jsonplaceholder.typicode.com/users/${id}`, updateContact);
-    dispatch({type: 'UPDATE_CONTACT', payload: res.data});
-    this.setState({
-      name: '',
-      email: '',
-      phone: '',
-      errors: {},
-    });
+    this.props.updateContact(updateContact);
     this.props.history.push('/');
   };
 
@@ -119,9 +110,10 @@ class EditContact extends Component {
 EditContact.propTypes = {
   contact: PropTypes.object.isRequired,
   getContact: PropTypes.func.isRequired,
+  updateContact: PropTypes.func.isRequired,
 };
 const mapStateToProps = state => ({
   contact: state.contact.contact,
 });
 
-export default connect(mapStateToProps, {getContact})(EditContact);
+export default connect(mapStateToProps, {getContact, updateContact})(EditContact);

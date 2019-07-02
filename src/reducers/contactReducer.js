@@ -29,7 +29,7 @@ export default function (state = initialState, action) {
     case UPDATE_CONTACT:
       return {
         ...state,
-        contacts: state.contacts.map(contact => contact.id === action.payload.id ? action.payload.id : contact)
+        contacts: state.contacts.map(contact => contact.id === action.payload.id ? action.payload : contact)
       };
     default:
       return state;
